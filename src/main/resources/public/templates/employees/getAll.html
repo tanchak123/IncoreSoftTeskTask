@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Employees</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/}">Main</a>
+        <a th:href="@{/employees/getAll}">Employees</a>
+        <a th:href="@{/departments/getAll}">Departments</a>
+        <a th:href="@{/employees}">Employees REST</a>
+        <a th:href="@{/departments}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+    </div>
+</div>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>email</th>
+        <th>experienceYears</th>
+        <th>createDate</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><a class="button button2" th:href="@{/employees/create}">Create</a></th>
+    </tr>
+    <div th:switch ="${employees.size() > 0}">
+            <caption th:case="false">Employees do not exist</caption>
+            <div th:case="true"><caption>Employees</caption>
+            <th:block th:each="employee : ${employees}">
+                <tr>
+                    <form id="postForm" th:action="@{/}" th:method="post">
+                        <td th:text="${employee.id}"></td>
+                        <td th:text="${employee.name}"></td>
+                        <td th:text="${employee.email}"></td>
+                        <td th:text="${employee.experienceYears}"></td>
+                        <td th:text="${employee.createDate}"></td>
+                        <td><a class="button" th:href="@{'/employees/get?id=' + ${employee.id}}">View</a></td>
+                        <td><a class="button" th:href="@{'/employees/get?id=' + ${employee.id} + '&isUpdate=true'}">Update</a></td>
+                        <td><button class="button" name="id" form="postForm" th:formaction="@{/employees/delete}" th:value="${employee.id}">Delete</button></td>
+                        <td><a th:href="@{'/employees/getDepartments?id=' + ${employee.id}}" class="button">Departments</a></td>
+                    </th>
+                    </form>
+                </tr>
+            </th:block>
+            <tr>
+                 <td colspan="7">PageNumber: <span th:text="${page}"></span></td>
+                <td>
+                    <a class="button button1" th:if="${page > 1}" th:href="@{'/employees/getAll?page=' + ${page - 1}}">PREVIOUS</a>
+                </td>
+                <td>
+                    <a class="button button1" th:if="${employees.size() == 10}" th:href="@{'/employees/getAll?page=' + ${page + 1}}">NEXT</a>
+                </td>
+            </tr>
+            </div>
+    </div>
+</table>
+</body>
+</html>

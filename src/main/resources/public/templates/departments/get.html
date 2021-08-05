@@ -1,0 +1,38 @@
+<html>
+  <html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>Department view</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/}">Main</a>
+        <a th:href="@{/departments/getAll}">Employees</a>
+        <a th:href="@{//getAll}">Departments</a>
+        <a th:href="@{/employeesdepartments}">Employees REST</a>
+        <a th:href="@{/employees}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+        <a th:href="@{/departments/getAll}">Back</a>
+    </div>
+</div>
+<h1 style="color:#ff0000;text-align: center;alignment: center" th:text="${message}"></h1>
+<form id="form" method="post" action="${pageContext.request.contextPath}/employee">
+  <table>
+    <caption>Employee</caption>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>createDate</th>
+    </tr>
+    <tr>
+        <td th:text="${department.id}"></td>
+        <td th:text="${department.name}"></td>
+        <td th:text="${department.createDate}"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

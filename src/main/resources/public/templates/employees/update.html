@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee update</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="utf-8">
+</head>
+<body>
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/}">Main</a>
+        <a th:href="@{/employees/getAll}">Employees</a>
+        <a th:href="@{/departments/getAll}">Departments</a>
+        <a th:href="@{/employees}">Employees REST</a>
+        <a th:href="@{/departments}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+    </div>
+</div>
+<h1 style="color:#ff0000;text-align: center;alignment: center" th:text="${message}"></h1>
+  <table>
+    <caption>Employee</caption>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>email</th>
+      <th>experienceYears</th>
+      <th colspan="2">createDate</th>
+    </tr>
+    <tr><form id="form" name="employee" th:name="employee" th:object="${employee}" method="post" th:action="@{/employees/update}">
+              <td><input name="id" th:field="*{id}" th:value="${employee.id}" readonly/></td>
+              <td><input required name="name" th:field="*{name}" th:value="${employee.name}"/></td>
+              <td><input required name="email" type="email" th:field="*{email}" th:value="${employee.email}"/></td>
+              <td><input required name="experienceYears" type="number" th:field="*{experienceYears}" th:value="${employee.experienceYears}"/></td>
+              <td><input name="createDate" readonly th:field="*{createDate}" th:value="${employee.createDate}"/></td>
+              <td><button class="button" type="submit" form="form">Update</button></td>
+    </form>
+    </tr>
+  </table>
+</body>
+</html>

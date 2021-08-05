@@ -1,0 +1,5 @@
+driver=org.postgresql.Driver
+databaseName=IncoreSoft
+url=jdbc:postgresql://localhost:5432/IncoreSoft
+user=postgres
+password=123

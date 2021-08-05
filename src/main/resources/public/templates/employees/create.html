@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Employee Create</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+</head>
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/}">Main</a>
+        <a th:href="@{/employees/getAll}">Employees</a>
+        <a th:href="@{/departments/getAll}">Departments</a>
+        <a th:href="@{/employees}">Employees REST</a>
+        <a th:href="@{/departments}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+        <a th:href="@{/employees/getAll}">Back</a>
+    </div>
+</div>
+<h1 th:text="${message}" style="color: red; text-align: center"></h1>
+<form id="form" method="post" th:action="@{/employees/create}">
+    <table>
+        <caption>Employee</caption>
+        <tr><td style="text-align: right"><label for="name">Name: </label><input required id="name" name="name" type="text" th:value="${employee.Name}"/></td></tr>
+        <tr><td style="text-align: right"><label for="email">Email: </label><input required id="email" name="email" type="email" th:value="${employee.email}"/></td></tr>
+        <tr><td style="text-align: right"><label for="experienceYears">Experience in years: </label><input required th:value="${employee.experienceYears}" id="experienceYears" name="experienceYears" type="number"/></td></tr>
+        <tr><td><button style="margin: auto; display: block; alignment: center" class="button" type="submit" form="form">Create</button></td></tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Main page</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/employees/getAll}">Employees</a>
+        <a th:href="@{/departments/getAll}">Departments</a>
+        <a th:href="@{/employees}">Employees REST</a>
+        <a th:href="@{/departments}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+    </div>
+</div>
+<body>
+</body>
+</html>

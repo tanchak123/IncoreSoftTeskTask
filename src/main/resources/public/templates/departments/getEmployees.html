@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Employees of department</title>
+</head>
+<body class="text-center bg-light text-dark">
+<div class="text-center" style="padding-bottom: 50px">
+    <div class="navbar">
+        <a th:href="@{/}">Main</a>
+        <a th:href="@{/employees/getAll}">Employees</a>
+        <a th:href="@{/departments/getAll}">Departments</a>
+        <a th:href="@{/departments}">Employees REST</a>
+        <a th:href="@{/employees}">Departments REST</a>
+        <a th:href="@{/employees/1}">Employee№1</a>
+        <a th:href="@{/departments/1}">Department№1</a>
+    </div>
+</div>
+<table>
+    <caption th:text="'List Employees of department with Id: ' + ${department.id} + 'and Name: ' + ${department.name}">
+    </caption>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>createDate</th>
+        <th colspan="4"></th>
+    </tr>
+    <th:block th:if="${department.employeeList.size() eq 0}">
+            <td colspan="9" th:value="'List Employees of department with Id: ' + ${department.id} + 'and Name: ' + ${department.name} + 'dont exist'">
+            </td>
+    </th:block>
+    <th:block th:if="${department.employeeList.size() > 0}">
+            <th:block  th:each="employee : ${department.employeeList}">
+                <tr>
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.createDate}"></td>
+                    <td><a class="button" th:href="@{'/departments/get?id=' + ${employee.id}}">View</a></td>
+                    <td><a class="button" th:href="@{'/departments/get?id=' + ${employee.id} + '&isUpdate=true'}">Update</a></td>
+                    <form id="remove" method="post" th:action="@{'/departments/remove'}">
+                        <input name="employeeId" type="hidden" th:value="${employee.id}"/>
+                        <td><button id="button" class="button" type="submit" name="departmentId" th:value="${department.Id}" form="remove">Remove</button></td>
+                    </form>
+                    <td><a class="button" th:href="@{'/employees/getDepartments?id=' + ${employee.id}}">Departments</a></td>
+                </tr>
+            </th:block>
+    </th:block>
+    <tr>
+        <td colspan="5" th:text="'PageNumber : ' + ${page}"></td>
+        <td>
+                <a th:if="${page > 1}" class="button button1" th:href="@{'/employees/getDepartments?id=' + ${employee.id} + '&page=' + ${page - 1}}">PREVIOUS</a>
+        </td>
+        <td>
+                <a th:if="${department.employeeList.size() > 10}" class="button button1" th:href="@{'/employees/getDepartments?id=' + ${employee.id} + '&page=' + ${page + 1}}">NEXT</a>
+        </td>
+    </tr>
+    <form id="poster" method="get" th:action="@{/departments/add}">
+        <tr><td colspan="9"><button name="departmentId" type="submit" form="poster" th:value="${department.id}" style="margin:auto;display: block;alignment: center" class="button button1">ADD</button></td></tr>
+    </form>
+</table>
+</body>
+</html>
