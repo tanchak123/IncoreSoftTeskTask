@@ -20,6 +20,7 @@ public class MainController {
                 employee.setName("newEmp" + i);
                 employee.setEmail("new" + i + "@gmail.com");
                 employee.setExperienceYears(12);
+                DaoUtils.employeeService.create(employee);
                 department.getEmployeeList().add(employee);
                 DaoUtils.departmentService.create(department);
             }
