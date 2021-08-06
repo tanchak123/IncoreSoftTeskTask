@@ -1,8 +1,7 @@
 package controllers.departments;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import dto.DepartmentDto;
 import dto.EmployeeDto;
 import io.javalin.http.Context;
@@ -40,7 +39,7 @@ public class DepartmentController {
             });
             thread.start();
         }
-        context.json(departments);
+        context.result(JSON.toJSONString(departments));
     }
     public static void get(Context context) {
         String id = context.pathParam("id");
@@ -49,7 +48,7 @@ public class DepartmentController {
             context.result("No Department with id: " + context.pathParam("id"));
             return;
         }
-        context.json(department);
+        context.result(JSON.toJSONString(department));
     }
 
     public static void getById(Context context) {
@@ -93,14 +92,14 @@ public class DepartmentController {
         } catch (IOException malformedURLException) {
             malformedURLException.printStackTrace();
         }
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        List<DepartmentDto> value = null;
-        try {
-            value = Arrays.asList(mapper.readValue(content.toString(), DepartmentDto[].class));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        List<DepartmentDto> value = JSONObject.parseArray(content.toString(), DepartmentDto.class);
+//        try {
+//            value = Arrays.asList(mapper.readValue(content.toString(), DepartmentDto[].class));
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
         value = value.stream().skip((Long.parseLong(page) * 10) - 10).limit(10).collect(Collectors.toList());
         model.put("departments", value);
         context.render("departments/getAll.html", model);

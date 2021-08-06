@@ -26,9 +26,9 @@
         <th></th>
         <th><a class="button button2" th:href="@{/employees/create}">Create</a></th>
     </tr>
-    <div th:switch ="${departments.size() > 0}">
-            <caption th:case="false">Employees do not exist</caption>
-            <div th:case="true"><caption>Employees</caption>
+    <th:block th:switch ="${departments.size() > 0}">
+            <caption th:case="false">Departments do not exist</caption>
+            <caption th:case="true">Departments</caption>
             <th:block th:each="department : ${departments}">
                 <tr>
                     <form id="postForm" th:action="@{/}" th:method="post">
@@ -42,7 +42,7 @@
                     </th>
                     </form>
                 </tr>
-            </th:block>
+            </th:block></th:block>
             <tr>
                  <td colspan="5">PageNumber: <span th:text="${page}"></span></td>
                 <td>
@@ -52,8 +52,8 @@
                     <a class="button button1" th:if="${departments.size() == 10}" th:href="@{'/departments/getAll?page=' + ${page + 1}}">NEXT</a>
                 </td>
             </tr>
-            </div>
-    </div>
+            </caption>
+    </th:block>
 </table>
 </body>
 </html>

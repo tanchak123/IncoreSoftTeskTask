@@ -25,11 +25,11 @@
         <th>createDate</th>
         <th colspan="3"></th>
     </tr>
-        <th:if test="${departments.size() eq 0}">
+        <th:block th:if="${departments.size() eq 0}">
             <td colspan="8">
                 List of Departments don't exist
             </td>
-        </th:if>
+        </th:block>
     <th:block th:each="department : ${departments}">
             <tr>
                 <td th:text="${department.id}"></td>

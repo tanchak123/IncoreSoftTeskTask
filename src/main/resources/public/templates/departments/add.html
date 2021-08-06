@@ -27,7 +27,7 @@
         <th>CreateDate</th>
         <th colspan="3"></th>
     </tr>
-    <th:block th:if="${employees.size() eq 0}">
+    <th:block th:if="${employees.size() <= 0}">
         <td colspan="8">
             List of Departments don't exist
         </td>

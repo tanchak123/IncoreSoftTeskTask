@@ -1,11 +1,8 @@
 package dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import lombok.Singular;
-import utils.LocalDateDeserializer;
-import utils.LocalDateSerializer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,16 +13,19 @@ public class EmployeeDto {
 
     private Long id;
 
+    @JSONField(ordinal = 1)
     private String name;
 
+    @JSONField(ordinal = 2)
     private String email;
 
     @Singular
+    @JSONField(ordinal = 5)
     private List<DepartmentDto> departmentList = new ArrayList<>();
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
+    @JSONField(format = "dd/MM/yyyy", ordinal = 4)
     private LocalDate createDate;
 
+    @JSONField(ordinal = 3)
     private Integer experienceYears;
 }
